@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>BMI Calculator</title>
+</head>
+<body>
+
+    <h1>BMI Calculator</h1>
+    <label for="unitType">Select Unit Type:</label>
+    <select id="unitType" onchange="selectUnits()">
+        <option value="metric">Metric (kg, m)</option>
+        <option value="standard">Standard (lbs, ft)</option>
+    </select><br><br>
+    <label id="weightLabel" for="weight">Weight:</label>
+    <input type="text" id="weight"><br><br>
+    <label id = "heightLabel" for="height">Height:</label>
+    <input type="text" id="height"><br><br>
+    <button onclick="bmi_calc()">Calculate BMI</button><br><br>
+    <div id="result"></div>
+    <div id="category"></div>
+    <script src="health_calc.js"></script>
+
+</body>
+</html>
