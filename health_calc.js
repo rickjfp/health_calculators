@@ -1,3 +1,17 @@
+// Split out the BMI tool include converter
+function convert_to_metric() {
+    var lbs = parseFloat(document.getElementById("lbs").value);
+    var ft = parseFloat(document.getElementById("ft").value);
+    var inch = parseFloat(document.getElementById("inch").value);
+
+    // Check if the inputs are valid numbers
+    if (isNaN(lbs) || isNaN(ft) || isNaN(inch) 
+        || lbs <= 0 || ft <= 0 || inch < 0) {
+        alert("Please enter valid values for weight and height.");
+        return;
+    }
+}
+
 
 // BMI tool - units determined by metric selection
 function bmi_calc() {
