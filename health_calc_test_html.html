@@ -1,28 +1,49 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>BMI Calculator</title>
+    <title>Health Calculator</title>
 </head>
 <body>
 
+    
+    <h1>Convert to Metric</h1>
+    
+    <label id="lbslabel" for="lbs">Pounds:</label>
+    <input type="number" id="lbs"><br><br>
+    
+    <label id = "ftlabel" for="ft">Feet:</label>
+    <input type="number" id="ft"><br><br>
+
+    <label id = "inchlabel" for="inch">Inches:</label>
+    <input type="number" id="inch"><br><br>
+    
+    <button onclick="convert_to_metric()">Convert</button><br><br>
+    
+    <div id="weight_convert"></div>
+    <div id="height_convert"></div>
+    <script src="health_calc.js"></script>
+
+
+    
     <h1>BMI Calculator</h1>
-    <label for="unitType">Select Unit Type:</label>
-    <select id="unitType" onchange="selectUnits()">
-        <option value="metric">Metric (kg, m)</option>
-        <option value="standard">Standard (lbs, ft)</option>
-    </select><br><br>
-    <label id="weightLabel" for="weight">Weight:</label>
-    <input type="text" id="weight"><br><br>
-    <label id = "heightLabel" for="height">Height:</label>
-    <input type="text" id="height"><br><br>
+
+    <label id="weightLabel" for="weight">Weight (kg):</label>
+    <input type="number" id="weight"><br><br>
+    
+    <label id = "heightLabel" for="height">Height (m):</label>
+    <input type="number" id="height"><br><br>
+    
     <button onclick="bmi_calc()">Calculate BMI</button><br><br>
+    
     <div id="result"></div>
     <div id="category"></div>
     <script src="health_calc.js"></script>
 
+    
+    
     <h1>HR Zone Calc</h1>
     <label id="ageLabel" for="age">Age:</label>
-    <input type="text" id="age"><br><br>
+    <input type="number" id="age"><br><br>
     <button onclick="hr_zone_calc()">HR Zones</button><br><br>
     <div id="z1_hr"></div>
     <div id="z2_hr"></div>
@@ -31,19 +52,81 @@
     <div id="z5_hr"></div>
     <script src="health_calc.js"></script>
 
+    
+    
     <h1>Fit Points Calc</h1>
     <label id="z1min" for="z1m">Z1 Min:</label>
-    <input type="text" id="z1m"><br><br>
+    <input type="number" id="z1m"><br><br>
+
     <label id="z2min" for="z2m">Z2 Min:</label>
-    <input type="text" id="z2m"><br><br>
+    <input type="number" id="z2m"><br><br>
+
     <label id="z3min" for="z3m">Z3 Min:</label>
-    <input type="text" id="z3m"><br><br>
+    <input type="number" id="z3m"><br><br>
+
     <label id="z4min" for="z4m">Z4 Min:</label>
-    <input type="text" id="z4m"><br><br>
+    <input type="number" id="z4m"><br><br>
+
     <label id="z5min" for="z5m">Z5 Min:</label>
-    <input type="text" id="z5m"><br><br>
+    <input type="number" id="z5m"><br><br>
+
     <button onclick="fit_points_calc()">Fit Points</button><br><br>
+    
+    <div id="fitpts_trg"></div>
     <div id="fitpts"></div>
+    
+    <script src="health_calc.js"></script>
+
+    
+    
+    <h1>Daily Nutrition Grade</h1>
+    <p>Use range 0-5 to rate if you met the nutrition protocols below (5 being highest)</p>
+    <br>
+
+    <label id="fruveg_label" for="fruveg">Fruits & Veggies:</label>
+    <input type="range" id="fruveg" min="0" max="5" step="1" value="1">
+    <label> 5+ Servings -> half cup (half-fist) heap of veggies only, or veggies and fruit</label>
+    <br><br>
+
+    <label id="wholegrain_label" for="wholegrain">Whole Grains:</label>
+    <input type="range" id="wholegrain" min="0" max="5" step="1" value="1">
+    <label> 5+ Servings -> whole grain foods (1/2 cup oats or rice, 1 slice whole grain bread, etc.) </label>
+    <br><br>
+
+    <label id="leanprotein_label" for="leanprotein">Lean Proteins:</label>
+    <input type="range" id="leanprotein" min="0" max="5" step="1" value="1">
+    <label> 5+ Servings -> half-cup beans or lentils, half-fist slice lean meat </label>
+    <br><br>
+
+    <label id="healthyfats_label" for="healthyfats">Healthy Fats:</label>
+    <input type="range" id="healthyfats" min="0" max="5" step="1" value="1">
+    <label> 5 Servings -> tbl olive oil or nut butter, half-handful nuts or seeds, 1/2 avodcado (also account 1 serving fats for every 2 servings or meat or dairy)  </label>
+    <br><br>
+
+    <label id="oil_label" for="oil">Oily or Fried Foods:</label>
+    <input type="number" id="oil"> 
+    <label> Number of Servings -> e.g. french fries, fried chicken, hydrogenated oils</label>
+    <br><br>
+
+    <label id="process_label" for="processed">Processed Foods:</label>
+    <input type="number" id="processed"> 
+    <label> Number of Servings -> e.g. Non Whole grain breads and baked goods, cereals, processed meats, etc. </label>
+    <br><br>
+
+    <label id="sugar_label" for="sugar">Added Sugar:</label>
+    <input type="number" id="sugar"> 
+    <label> Number of Servings -> e.g. Soda, candy, cookies, etc.  </label>
+    <br><br>
+
+    <label id="alcohol_label" for="alcohol">Alcoholic Beverages:</label>
+    <input type="number" id="alcohol"> 
+    <label> Number of Servings -> e.g. glass wine, shot of liquor, 12 oz beer </label>
+    <br><br>
+
+    <button onclick="nutrition_calc()">Nutrition Calc</button><br><br>
+    
+    <div id="nutritionScore"></div>
+    
     <script src="health_calc.js"></script>
 
 </body>

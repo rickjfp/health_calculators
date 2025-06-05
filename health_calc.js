@@ -4,12 +4,18 @@ function convert_to_metric() {
     var ft = parseFloat(document.getElementById("ft").value);
     var inch = parseFloat(document.getElementById("inch").value);
 
-    // Check if the inputs are valid numbers
-    if (isNaN(lbs) || isNaN(ft) || isNaN(inch) 
-        || lbs <= 0 || ft <= 0 || inch < 0) {
-        alert("Please enter valid values for weight and height.");
+    // Check if the inputs are negative
+    if ( lbs < 0 || ft < 0 || inch < 0 ) {
+        alert("Only works with positive numbers.");
         return;
     }
+
+    var weight_convert = (lbs * .4536).toFixed(2) ;
+    var height_convert = (( ft * 0.3048 ) + (inch * 0.0254)).toFixed(3) ;
+
+    // Display Conversion
+    document.getElementById("weight_convert").innerHTML = "kg: " + weight_convert;
+    document.getElementById("height_convert").innerHTML = "m: " + height_convert;
 }
 
 
@@ -17,31 +23,12 @@ function convert_to_metric() {
 function bmi_calc() {
     
     // Get variables from the input
-    var unitType = document.getElementById("unitType").value;
-    var weight = parseFloat(document.getElementById("weight").value);
-    var height = parseFloat(document.getElementById("height").value);
+    var weight_kg = parseFloat(document.getElementById("weight").value);
+    var height_m = parseFloat(document.getElementById("height").value);
 
-    // Label the input fields
-    if (unitType === "metric") {
-        document.getElementById("weightLabel").innerHTML = "Weight (kg):";
-        document.getElementById("heightLabel").innerHTML = "Height (m):";
-    } else if (unitType === "standard") {
-        document.getElementById("weightLabel").innerHTML = "Weight (lbs):";
-        document.getElementById("heightLabel").innerHTML = "Height (ft):";
-    }
-
-    // Convert any standard calcs to metric
-    if ( unitType == "standard") {
-        var weight_kg = weight / 2.20462;
-        var height_m = height / 3.28084;
-    } else if (unitType == "metric") {
-        var weight_kg = weight;
-        var height_m = height;
-    }
-
-    // Check if the inputs are valid numbers
-    if (isNaN(weight_kg) || isNaN(height_m) || weight_kg <= 0 || height_m <= 0) {
-        alert("Please enter valid values for weight and height.");
+    // Check if the inputs are negative
+    if ( weight_kg < 0 || height_m < 0 ) {
+        alert("Only works with positive numbers.");
         return;
     }
 
@@ -75,9 +62,9 @@ function hr_zone_calc() {
     // Set zone variables
     var age = parseFloat(document.getElementById("age").value);
     
-    // Check if the inputs are valid numbers
-    if (isNaN(age) || age <= 0 || age > 110) {
-        alert("Please enter valid age.");
+    // Check if the inputs are negative
+    if ( age < 0 ) {
+        alert("Only works with positive numbers.");
         return;
     }
 
@@ -95,30 +82,56 @@ function hr_zone_calc() {
         "Zone 5 (90%-100%): " + Math.round(maxHeartRate * 0.9) + "-" + Math.round(maxHeartRate * 1) + " bpm";
 }
 
+
+// Fitness Calc
 function fit_points_calc() {
     
-    var z1m = parseFloat(document.getElementById("z1m").value);
-    var z2m = parseFloat(document.getElementById("z2m").value);
-    var z3m = parseFloat(document.getElementById("z3m").value);
-    var z4m = parseFloat(document.getElementById("z4m").value);
-    var z5m = parseFloat(document.getElementById("z5m").value);
+    var z1m = parseFloat(document.getElementById("z1m").value) || 0;
+    var z2m = parseFloat(document.getElementById("z2m").value) || 0;
+    var z3m = parseFloat(document.getElementById("z3m").value) || 0;
+    var z4m = parseFloat(document.getElementById("z4m").value) || 0;
+    var z5m = parseFloat(document.getElementById("z5m").value) || 0;
 
-    // Check if the inputs are valid numbers
-    if ( isNaN(z1m) || z1m < 0 
-        || isNaN(z2m) || z2m < 0
-        || isNaN(z3m) || z3m < 0 
-        || isNaN(z4m) || z4m < 0 
-        || isNaN(z5m) || z5m < 0 ) {
-        alert("Please enter valid minutes.");
+
+    // Check if the inputs are negative
+    if ( z1m < 0 || z2m < 0 || z3m < 0 || z4m < 0 || z5m < 0  ) {
+        alert("Only works with positive numbers.");
         return;
     }
 
     // fit points
     var ftpts_wk_target = 150;
-    var ftpts = (z1m * 0.5) + (z2m * 1) + (z3m * 1) + (z4m * 1.5) + (z5m * 2);
+    var ftpts = (z1m * 0.5) + (z2m * 1) + (z3m * 1.5) + (z4m * 2) + (z5m * 2.5);
 
-    document.getElementById("fitpts").innerHTML = 
+    document.getElementById("fitpts_trg").innerHTML = 
         "Weekly Target: " + ftpts_wk_target;
     document.getElementById("fitpts").innerHTML = 
         "Fitness Points: " + ftpts;
+}
+
+
+// Nutrition Calc
+function nutrition_calc() {
+    
+    // Healthy food servings
+    var fruveg = parseFloat(document.getElementById("fruveg").value);
+    var wholegrain = parseFloat(document.getElementById("wholegrain").value);
+    var leanprotein = parseFloat(document.getElementById("leanprotein").value);
+    var healthyfats = parseFloat(document.getElementById("healthyfats").value);
+
+    // Unhealthy treats!
+    var oil = parseFloat(document.getElementById("oil").value);
+    var processed = parseFloat(document.getElementById("processed").value);
+    var sugar = parseFloat(document.getElementById("sugar").value);
+    var alcohol = parseFloat(document.getElementById("alcohol").value);
+
+    var score_num = (fruveg + wholegrain + leanprotein + healthyfats) - oil - processed - sugar - alcohol;
+    var score_den = 20
+
+    var score = (score_num / score_den)*100
+
+    document.getElementById("nutritionScore").innerHTML = 
+        "Score: " + score + "%"
+
+    
 }
